@@ -398,39 +398,30 @@ def search_by_embedding(self, search_embedding, limit=TOTAL_NUMBER_OF_RESULTS):
                     <img alt="example snippet" src="assets/images/another_api_tracing.png"/>
                 </section>
 
-                <section data-background="#3d5c96">
-                    <h2> But Some Are </h2>
-                        <ul>
-                            <li> Bloom filter is itself a cool data structure. It allows you to make trade-off between space and false-positive rate. </li> 
-                            <li> We did the timing experiment and also the space experiment before dedicating ourselves to Bloom Filter. It worked out
-                                pretty great to build some confidence before dedicating ourselves fully to the Bloom filter. </li> 
-                            <li> Instead of compiling the ineligible list in the ratings process endpoint, we do this in the query potentials endpoint
-                                which is much more rarely accessed and used than process ratings endpoint. </li> 
-                        </ul>
-
+                <section data-background="#45a4ec">
+                    <h2>How does it look?</h2>
                 </section>
 
-                <section data-background="#3d5c96">
-                    <h2> But Some Are </h2>
-                            <article> There is no acking between services in this approach as Bloom Filter is always going to be passed to Recommender when a potential 
-                                query comes it. Previously, API was acking whenever there is a potential that it received from the recommender, which created
-                                consistently inconsistent states between api and recommender. </article>
+                <section data-background="#c92940">
+                    <img alt="example snippet" src="assets/images/first_result.png"/>
+                </section>
+                
+                <section data-background="#c92940">
+                    <img alt="example snippet" src="assets/images/second_result.png"/>
+                </section>
+                
+                <section data-background="#c92940">
+                    <img alt="example snippet" src="assets/images/third_result.png"/>
                 </section>
 
 				<section data-background="#55acee">
 					<h2><strong>Links</strong></h2>
                     <ul>
-                        <li><a href="https://github.com/Hinge/python-bloomfilter">pybloom</a></li>
-                        <li><a href="https://github.com/axiak/pybloomfiltermmap"> pybloomfiltermmap </a></li>
+                        <li><a href="https://www.tensorflow.org/hub/">Tensorflow Hub</a></li>
+                        <li><a href="https://github.com/facebookresearch/faiss"> FAISS </a></li>
+                        <li><a href="https://www.tensorflow.org/serving/"> Tensorflow Model Serving </a></li>
                     </ul><br><br>
 				</section>
-
-<section data-markdown data-background="#55acee">
-## References 
-- [Bloom Filter's Wikipedia Page](https://en.wikipedia.org/wiki/bloom_filter)
-- [How medium uses boom filter not to recommend an article the member read](https://medium.com/the-story/what-are-bloom-filters-1ec2a50c68ff#.vm1fuxwfi)
-- [Bitcoin uses for bitcoin wallet synchronization](https://github.com/bitcoin/bitcoin/blob/a6a860796a44a2805a58391a009ba22752f64e32/src/bloom.cpp#l24)
-</section>
 
 				<section data-background="#55acee">
 					<h2><strong>Questions?</strong></h2>
