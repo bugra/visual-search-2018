@@ -237,7 +237,7 @@
                     <h4> PNasNet Model </h4>
                 </section>
                 
-<section data-markdown>
+<section data-markdown data-background="#c92940">
 ### PNasNet through TFHUB
 ```python
 module = hub.Module("https://tfhub.dev/google/imagenet/pnasnet_large/classification/2")
@@ -251,7 +251,7 @@ logits = module(images)  # Logits with shape [batch_size, num_classes].
                 </section>
 
 
-<section data-markdown>
+<section data-markdown data-background="#c92940">
 ### Retraining
 ```python
 layer_name = 'final_retrain_ops'
@@ -288,15 +288,19 @@ with tf.name_scope(layer_name):
                 <section data-background="#c92940">
                     <img alt="example snippet" src="assets/images/tensorflow_model_serving_architecture.png"/>
                 </section>
+                
+                <section data-background="#45a4ec">
+                    <h4>Facebook Artificial Intelligence Similarity Search</h4>
+                    <br>
+                    <h2>FAISS</h2>
+                </section>
                
-               <section data-background="#c92940">
+               <section data-background="#45a4ec">
                     <img alt="example snippet" src="assets/images/faiss-indexin.jpg"/>
                 </section>
 
 
-              
-
-<section data-markdown>
+<section data-markdown data-background="#45a4ec">
 ### FAISS (Indexing)
 ```python
 import faiss                   # make faiss available
@@ -307,12 +311,19 @@ print index.ntotal
 ```
 </section>
 
-<section data-markdown>
+<section data-markdown data-background="#45a4ec">
+### FAISS (Query)
+ ```python
 # xq is a n2-by-d matrix with query vectors
 k = 4                          # we want 4 similar vectors
 D, I = index.search(xq, k)     # actual search
 print I
-</section>                            
+```
+</section>         
+             
+                <section data-background="#45a4ec">
+                    <img alt="example snippet" src="assets/images/faiss-indexin.jpg"/>
+                </section>                   
               
                 <section data-background="#c92940">
                     <img alt="example snippet" src="assets/images/api-architecture.png"/>
@@ -358,64 +369,33 @@ def search_by_embedding(self, search_embedding, limit=TOTAL_NUMBER_OF_RESULTS):
 
 </section>
 
-                <section data-background="#3d5c96">
-                    <h1> Experiments that we did </h1>
+               
+               <section data-background="#c92940">
+                   <h2>Production Readiness</h2>
+               </section>
+               
+                <section data-background="#c92940">
+                    <img alt="example snippet" src="assets/images/catalog-parser-publish-events.png"/>
                 </section>
-
                 
-
-                <section data-background="#3d5c96"> 
-                    <h4> Time to check of membership existence in bloom filter with 10K capacity </h4>
-                    <br>
-                    <img alt="example snippet" src="assets/images/membership_existence_10000.png"/>
+                <section data-background="#c92940">
+                    <h2>Indexers' Health</h2>
+                </section>
+                
+                <section data-background="#c92940">
+                    <img alt="example snippet" src="assets/images/hn_indexers_health.png"/>
                 </section>
 
-                <section data-background="#3d5c96"> 
-                    <h4> Varying Capacity of Bloom Filter with Time </h4>
-                    <br>
-                    <img alt="example snippet" src="assets/images/varying_capacity_time_spent.png"/>
+                <section data-background="#45a4ec">
+                    <h2>Tracing</h2>
+                </section>
+                
+                <section data-background="#45a4ec">
+                    <img alt="example snippet" src="assets/images/api_tracing.png"/>
                 </section>
 
-                <section data-background="#3d5c96">
-                    <article><strong> It could be improved by a lot </strong></article>
-                    <article><strong> Some libraries are already pretty fast </strong></article>
-                </section>
-
-                <section data-background="#3d5c96"> 
-                    <h4> Time to produce a bloom filter with 10K capacity </h4>
-                    <br>
-                    <img alt="example snippet" src="assets/images/new_capacity_time_10000.png"/>
-                </section>
-
-                <section data-background="#3d5c96"> 
-                    <h4> Time to check of membership existence in bloom filter with 10K capacity </h4>
-                    <br>
-                    <img alt="example snippet" src="assets/images/new_membership_10000.png"/>
-                </section>
-
-                <section data-background="#3d5c96"> 
-                    <h4> Varying Capacity of Bloom Filter with Time </h4>
-                    <br>
-                    <img alt="example snippet" src="assets/images/new_varying_capacity_time_spent.png"/>
-                </section>
-
-                <section data-background="#3d5c96">
-                    <h4> However, we could not use the new fast library as it does not support Python 3 </h4>
-                    <br><br>
-                    <h4> I am looking at you; API and relationship service </h4>
-                </section>
-
-                <section data-background="#3d5c96">
-                    <h2> Not everything is so great </h2>
-                        <ul>
-                            <li> Bloom filter does not provide an ineligible list; so one needs to check every compatible person 
-                                if it exists in the bloom filter. The time that membership check from Bloom filter increases linearly
-                                with the number of compatible people. Luckily, the lookups are super fast. </li>
-                            <li> Recommender in Python 2 and API is in Python 3. Serialization of binary data from Python 3 to Python 2 
-                                in JSON was the most joyful event in my career...  Said nobody. </li> 
-                            <li> Getting ineligible list, serializing into a bloom filter in Relationship Service and deserialize in Recommender. 
-                                There is some overhead comparing to what we had earlier. </li>
-                        </ul>
+               <section data-background="#c92940">
+                    <img alt="example snippet" src="assets/images/another_api_tracing.png"/>
                 </section>
 
                 <section data-background="#3d5c96">
@@ -435,26 +415,6 @@ def search_by_embedding(self, search_embedding, limit=TOTAL_NUMBER_OF_RESULTS):
                             <article> There is no acking between services in this approach as Bloom Filter is always going to be passed to Recommender when a potential 
                                 query comes it. Previously, API was acking whenever there is a potential that it received from the recommender, which created
                                 consistently inconsistent states between api and recommender. </article>
-                </section>
-
-				<section data-background="#55acee">
-					<h2><strong>Relationship Service</strong></h2>
-                    <ul>
-                        <li> Centralized place to process ratings, connections, potentials and incoming likes. </li>
-                        <li> One service to rule them all. </li>
-                    </ul>
-				</section>
-
-                <section data-background="#55acee"> 
-                    <h4> Recommendation Generation Process</h4>
-                    <br>
-                    <img alt="recommendation-generation" height="600" width="600" src="assets/images/recommendation_generation.png"/>
-                </section>
-
-                <section data-background="#55acee"> 
-                    <h4> Rating Processing </h4>
-                    <br>
-                    <img alt="ratings-process" height="600" width="600" src="assets/images/process_rating.png"/>
                 </section>
 
 				<section data-background="#55acee">
